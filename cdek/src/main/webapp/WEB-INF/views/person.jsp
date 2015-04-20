@@ -12,9 +12,7 @@
 			<tr>
 				<td><form:label path="name">Name</form:label></td>
 				<td><form:input path="name" /></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Submit" /></td>
+				<td><input type="submit" value="Add" /></td>
 			</tr>
 		</table>
 	</form:form>
@@ -30,9 +28,7 @@
 			<tr>
 				<td><form:label path="name">Name</form:label></td>
 				<td><form:input path="name" /></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Submit" /></td>
+				<td><input type="submit" value="Find" /></td>
 			</tr>
 		</table>
 	</form:form>
