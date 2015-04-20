@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ru.cdek.testwork.constants.HttpConstants;
 import ru.cdek.testwork.exceptions.ServiceException;
 import ru.cdek.testwork.model.Person;
 import ru.cdek.testwork.services.PersonService;
@@ -27,10 +28,10 @@ public class PersonController {
 		try {
 			persons = personService.findByName(person.getName());
 		} catch (ServiceException e) {
-			return new ModelAndView("error");
+			return new ModelAndView(HttpConstants.PAGE_ERROR);
 		}
 		
-		ModelAndView mav = new ModelAndView("person", "command", new Person());
+		ModelAndView mav = new ModelAndView(HttpConstants.PAGE_HOME, "command", new Person());
 		mav.addObject("persons", persons);
 		return mav;
 	}
@@ -42,7 +43,7 @@ public class PersonController {
 		try {
 			personService.add(person);
 		} catch (ServiceException e) {
-			return new ModelAndView("error");
+			return new ModelAndView(HttpConstants.PAGE_ERROR);
 		}
 		
 		return get(new Person(), model);

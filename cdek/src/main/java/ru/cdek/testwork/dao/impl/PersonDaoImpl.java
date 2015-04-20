@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ru.cdek.testwork.constants.DbConstants;
 import ru.cdek.testwork.dao.PersonDao;
 import ru.cdek.testwork.exceptions.ServiceException;
 import ru.cdek.testwork.model.Person;
@@ -27,15 +28,8 @@ public class PersonDaoImpl implements PersonDao {
 	@Autowired
 	private DataSource dataSource;
 
-	private String dbName = "test";
-	private String tableName = "person";
 	
-	private final String SQL_IS_TABLE_EXIST = "Show tables from " + dbName + " like '" + tableName + "'";
-	private final String SQL_CREATE_TABLE = "CREATE TABLE " + tableName + " (id serial NOT NULL, name character varying(255) NOT NULL)";
-	private final String SQL_INSERT_PERSON = "INSERT INTO " + tableName + " (name) values (?)";
-	private final String SQL_SELECT_PERSONS = "SELECT * FROM " + tableName + " WHERE name like ?";
-	
-
+	private final String SQL_CREATE_TABLE = "CREATE TABLE " + DbConstants.TABLE_NAME_PERSON + " (id serial NOT NULL, name character varying(255) NOT NULL)";
 	@PostConstruct
 	private void init() throws SQLException {
 		try {
@@ -56,7 +50,7 @@ public class PersonDaoImpl implements PersonDao {
 	}
 	
 	
-	
+	private final String SQL_IS_TABLE_EXIST = "Show tables from " + DbConstants.DATABASE_NAME + " like '" + DbConstants.TABLE_NAME_PERSON + "'";
 	private boolean isTableExist() throws SQLException {
 		PreparedStatement preparedStatement = getConnection()
 				.prepareStatement(SQL_IS_TABLE_EXIST);
@@ -65,7 +59,7 @@ public class PersonDaoImpl implements PersonDao {
 	}
 	
 	
-	
+	private final String SQL_INSERT_PERSON = "INSERT INTO " + DbConstants.TABLE_NAME_PERSON + " (name) values (?)";
 	@Override
 	public Person add(Person person) throws ServiceException {
 		try {
@@ -82,7 +76,7 @@ public class PersonDaoImpl implements PersonDao {
 	}
 	
 	
-
+	private final String SQL_SELECT_PERSONS = "SELECT * FROM " + DbConstants.TABLE_NAME_PERSON + " WHERE name like ?";
 	@Override
 	public List<Person> findByName(String name) throws ServiceException {
 		try {
