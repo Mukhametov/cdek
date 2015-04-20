@@ -24,20 +24,32 @@
 
 
 	<h2>View persons</h2>
-	
-	
-	
-	<table>
-		<c:forEach var="person" items="${persons}">
+
+	<form:form method="get" action="/testwork/person">
+		<table>
 			<tr>
-				<td>${person.id}</td>
-				<td>${person.name}</td>
+				<td><form:label path="name">Name</form:label></td>
+				<td><form:input path="name" /></td>
 			</tr>
-		</c:forEach>
-	</table>
+			<tr>
+				<td><input type="submit" value="Submit" /></td>
+			</tr>
+		</table>
+	</form:form>
 
-	<hr>
-
-
+	<c:if test="${not empty persons}">
+		<table>
+			<c:forEach var="person" items="${persons}">
+				<tr>
+					<td>${person.id}</td>
+					<td>${person.name}</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if>
+	<c:if test="${empty persons}">
+		No data
+	</c:if>
+	
 </body>
 </html>

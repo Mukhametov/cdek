@@ -27,7 +27,8 @@ public class PersonController {
 	
 	@RequestMapping(value = "/*", method = RequestMethod.GET)
 	public ModelAndView get(@ModelAttribute("SpringWeb") Person person, ModelMap model) {
-		List<Person> persons = personService.findByName(null);
+		
+		List<Person> persons = personService.findByName(person.getName());
 		
 		ModelAndView mav = new ModelAndView("person", "command", new Person());
 		mav.addObject("persons", persons);
@@ -40,7 +41,7 @@ public class PersonController {
 	public ModelAndView personAdd(@ModelAttribute("SpringWeb") Person person, ModelMap model) {
 		personService.add(person);
 		
-		return get(person, model);
+		return get(new Person(), model);
 	}
 	
 	
